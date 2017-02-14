@@ -1,4 +1,4 @@
-export default function({despatch}) {
+export default function({dispatch}) {
   return next => action => {
     // if action doesn't have payload or, the payload
     // doesn't have a .then property we don't care about
@@ -11,7 +11,9 @@ export default function({despatch}) {
       .then(function(response ) {
         //create a new action with the old type, but
         // replace the promise with the response data
-        const newAction = {...action, payload: response}
+        const newAction = {...action, payload: response};
+        dispatch(newAction);
+
       });
   }
 }
